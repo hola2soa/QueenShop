@@ -48,7 +48,7 @@ module Validate
   end
 end
 
-class Config
+class QConfig
   include Validate
   def initialize (args)
     validate_args (args)
