@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'oga'
 require 'open-uri'
+require_relative './config'
 
 # scrape data
 module QueenShopScraper
@@ -21,6 +22,24 @@ module QueenShopScraper
       'error'
     end
 
+    def fetch_result(uri = '')
+      url = @site_url + uri
+      # try to open the url
+      document = get_xmldata(url)
+      # hard return on an error
+      return [] unless document != 'error'
+
+      items = document.xpath(@item_selector)
+      # loop through the items and get the title and price
+      items.map do |item|
+        title = item.xpath(@title_selector).text.force_encoding('UTF-8')
+        price = item.xpath(@price_selector).text
+        @result << { title: "#{title}",
+        price: "#{price}" } unless title.empty?
+      end
+      @result
+    end
+
     public
 
     def initialize
@@ -32,23 +51,20 @@ module QueenShopScraper
       @site_url = 'https://www.queenshop.com.tw/m/PDList2.asp?'
     end
 
-    def fetch_result(uri = 'category=1')
-      url = @site_url + uri
-      # try to open the url
-      document = get_xmldata(url)
-      # hard return on an error
-      return [] unless document != 'error'
+    def scrape (params=[])
+      params.concat(ARGV)
+      puts params
+      conf = Config.new(params)
 
-      items = document.xpath(@item_selector)
-      puts items
-      # loop through the items and get the title and price
-      items.map do |item|
-        title = item.xpath(@title_selector).text.force_encoding('UTF-8')
-        price = item.xpath(@price_selector).text
-        @result << { title: "#{title}",
-        price: "#{price}" } unless title.empty?
+      @title_selector <<
+      "[contains( text(), '#{conf.parameters[:item]}')]" if !conf.parameters[:item].empty?
+
+      conf.pages.map do |page|
+        paginated_uri = "&page=#{page}"
+        fetch_result(paginated_uri)
       end
-      result
+      @result
     end
+
   end
 end

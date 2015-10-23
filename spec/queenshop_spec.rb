@@ -26,7 +26,7 @@ VCR.use_cassette 'queenshop1' do
       end
 
       it 'structure check' do
-        items = @scraper.fetch_result('page=2')
+        items = @scraper.scrape(['pages=1..4'])
 
         items.must_be_instance_of       Array
         items.wont_be_empty
