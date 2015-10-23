@@ -47,17 +47,20 @@ module QueenShopScraper
       # xml selectors that will be used to scrape data
       @item_selector = "//div[@class=\'pditem\']/div[@class=\'pdicon\']"
       @title_selector = "div[@class=\'pdicon_name\']/a"
-      @price_selector = "div[@class=\'pdicon_price\']/div"
+      @price_selector = "div[@class=\'pdicon_price\']/div[@style=\'font-weight:bold;\']"
       @site_url = 'https://www.queenshop.com.tw/m/PDList2.asp?'
     end
 
     def scrape (params=[])
       params.concat(ARGV)
-      puts params
-      conf = Config.new(params)
+      conf = QConfig.new(params)
 
       @title_selector <<
       "[contains( text(), '#{conf.parameters[:item]}')]" if !conf.parameters[:item].empty?
+
+      #@price_selector <<
+      # "[translate(text(), 'NT. ', '')" if !conf.parameters[:price].empty?
+      # #{conf.parameters[:price]}
 
       conf.pages.map do |page|
         paginated_uri = "&page=#{page}"
