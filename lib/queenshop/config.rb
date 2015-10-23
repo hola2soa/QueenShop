@@ -9,7 +9,7 @@ module Validate
   VALID_ARGS = [:item, :price, :pages]
 
   def validate_args(args)
-    @parameters = {:item => '', :pages => '1..2'}
+    @parameters = {item: '', price: '', pages: '1..2'}
     args.each do |arg|
       begin
         match = /(?<key>.*?)=(?<value>.*)/.match(arg)
