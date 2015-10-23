@@ -42,13 +42,13 @@ module Validate
       item=(string)
       price=(float[,float])
       examples:
-              queenshop item=基本實搭多色圓領上衣 price=300
+              queenshop item="blouse" price=300
               queenshop price=0,100
-              queenshop item=柔彩好搭雙'
+              queenshop item="skirt"'
   end
 end
 
-class Config
+class QConfig
   include Validate
   def initialize (args)
     validate_args (args)

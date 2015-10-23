@@ -53,7 +53,7 @@ module QueenShopScraper
 
     def scrape (params=[])
       params.concat(ARGV)
-      conf = Config.new(params)
+      conf = QConfig.new(params)
 
       @title_selector <<
       "[contains( text(), '#{conf.parameters[:item]}')]" if !conf.parameters[:item].empty?
