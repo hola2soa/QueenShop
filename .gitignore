@@ -1,0 +1,8 @@
+*~
+
+# bundler
+.bundle
+Gemfile.lock
+
+# testfiles
+spec/fixtures/vcr_cassettes/
