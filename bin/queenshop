@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# require 'queenshop' # for production
+require_relative '../lib/queenshop.rb' # for testing
+
+scraper = QueenShopScraper::Filter.new
+
+# try just first two pages for now
+# later will have users define pages via args
+pages = *(1..2)
+
+pages.map do |page|
+  paginated_uri = "&page=#{page}"
+  scraper.fetch_result(paginated_uri)
+end
+
+puts scraper.result
