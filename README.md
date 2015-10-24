@@ -37,5 +37,5 @@ If you want to use it in your library:
 ```ruby
 require 'queenshop'
 scraper = QueenShopScraper::Filter.new
-results = scraper.scrape(['price="<300"', 'pages=1..3'])
+results = scraper.scrape(['price=<300', 'pages=1..3'])
 ```

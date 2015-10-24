@@ -64,10 +64,10 @@ module QueenShopScraper
     end
 
     def scrape (params=[])
-      params.concat(ARGV)
+      params = ARGV.empty? ? params : ARGV
       conf = QConfig.new(params)
       @price_filter = conf.parameters[:price]
-      
+
       conf.pages.map do |page|
         paginated_uri = "&page=#{page}"
         fetch_result (paginated_uri)
