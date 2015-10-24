@@ -1,5 +1,5 @@
 # QueenShop API
-# Pinkoi [![Build Status](https://travis-ci.org/hola2soa/QueenShop.svg?branch=master)](https://travis-ci.org/hola2soa/QueenShop)
+# Pinkoi [![Gem Version](https://badge.fury.io/rb/queenshop.svg)](https://badge.fury.io/rb/queenshop) [![Build Status](https://travis-ci.org/hola2soa/QueenShop.svg?branch=master)](https://travis-ci.org/hola2soa/QueenShop)
 
 Queenshop is an ecommerce website selling women clothing but does not have an api.
 This API allows the scrapping of the site to extract the title and price
@@ -28,9 +28,9 @@ Usage: pinkoi [options]
       item=(string)
       pages=(int[..int])
       examples:
-          pinkoi price="==290" pages=2
-          pinkoi item="blouse" price="<300" pages=1..10
-          pinkoi price=">200" pages=3..5
+          queenshop price="==290" pages=2
+          queenshop item="blouse" price="<300" pages=1..10
+          queenshop price=">200" pages=3..5
 ```
 
 If you want to use it in your library:
