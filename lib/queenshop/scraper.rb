@@ -34,10 +34,21 @@ module QueenShopScraper
       items.map do |item|
         title = item.xpath(@title_selector).text.force_encoding('UTF-8')
         price = item.xpath(@price_selector).text
-        @result << { title: "#{title}",
-        price: "#{price}" } unless title.empty?
+        strip_filter(title, price)
       end
       @result
+    end
+
+    def strip_filter (title, price)
+      price = price.gsub!(/NT. /, '')
+      if !@price_filter.empty?
+        if eval("#{price} #{@price_filter}")
+          @result << { title: "#{title}", price: "#{price}" }
+        end
+      else
+        @result << { title: "#{title}", price: "#{price}" } unless title.empty?
+      end
+
     end
 
     public
@@ -49,22 +60,17 @@ module QueenShopScraper
       @title_selector = "div[@class=\'pdicon_name\']/a"
       @price_selector = "div[@class=\'pdicon_price\']/div[@style=\'font-weight:bold;\']"
       @site_url = 'https://www.queenshop.com.tw/m/PDList2.asp?'
+      @price_filter = nil
     end
 
     def scrape (params=[])
       params.concat(ARGV)
       conf = QConfig.new(params)
-
-      @title_selector <<
-      "[contains( text(), '#{conf.parameters[:item]}')]" if !conf.parameters[:item].empty?
-
-      #@price_selector <<
-      # "[translate(text(), 'NT. ', '')" if !conf.parameters[:price].empty?
-      # #{conf.parameters[:price]}
-
+      @price_filter = conf.parameters[:price]
+      
       conf.pages.map do |page|
         paginated_uri = "&page=#{page}"
-        fetch_result(paginated_uri)
+        fetch_result (paginated_uri)
       end
       @result
     end

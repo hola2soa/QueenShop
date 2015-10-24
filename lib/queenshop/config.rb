@@ -24,8 +24,9 @@ module Validate
 
   def check(match)
     value = match[:value]
-    Float(value) if match[:key].to_sym.eql?(:price)
-    fail unless value =~ /^\d([.]{2}\d)?$/ if match[:key].to_sym.eql?(:pages)
+    fail unless value =~ /^(>|<|>=|<=|==)\d*.\d*?$/ if match[:key].to_sym.eql?(:price)
+    # Float(value) if match[:key].to_sym.eql?(:price)
+    fail unless value =~ /^\d*([.]{2}\d*)?$/ if match[:key].to_sym.eql?(:pages)
     value
   rescue StandardError
       abort "invalid parameters"
