@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
     'Katy Lee', 'Frank Lee']
   s.email       = ['kiki44552002@gmail.com', 'lmherrera86@gmail.com',
     'katylee41024@yahoo.com.tw','frank1234211@gmail.com']
-  s.files       = ["lib/queenshop.rb", "lib/queenshop/scraper.rb"]
-  s.executables = ['pinkoi']
+  s.files       = ["lib/queenshop.rb", "lib/queenshop/config.rb", "lib/queenshop/scraper.rb"]
+  s.executables = ['queenshop']
   s.homepage    = 'http://rubygems.org/gems/pinkoi'
   s.license       = 'MIT'
 end
