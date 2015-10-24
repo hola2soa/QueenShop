@@ -3,4 +3,4 @@
 require_relative '../lib/queenshop.rb' # for testing
 
 scraper = QueenShopScraper::Filter.new
-puts scraper.scrape
+puts scraper.scrape(ARGV)
