@@ -28,7 +28,7 @@ VCR.use_cassette 'queenshop1' do
       it 'structure check' do
         items = @scraper.scrape(['pages=1..4'])
 
-        items.must_be_instance_of       Array
+        items.must_be_instance_of Array
         items.wont_be_empty
         items.first.must_be_instance_of Hash
         items.wont_be_empty
@@ -39,6 +39,5 @@ VCR.use_cassette 'queenshop1' do
         items.first[:price].must_be_instance_of String
       end
     end
-
   end
 end

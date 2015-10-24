@@ -39,7 +39,7 @@ module QueenShopScraper
       @result
     end
 
-    def strip_filter (title, price)
+    def strip_filter(title, price)
       price = price.gsub!(/NT. /, '')
       if !@price_filter.empty?
         if eval("#{price} #{@price_filter}")
@@ -48,7 +48,6 @@ module QueenShopScraper
       else
         @result << { title: "#{title}", price: "#{price}" } unless title.empty?
       end
-
     end
 
     public
@@ -58,21 +57,21 @@ module QueenShopScraper
       # xml selectors that will be used to scrape data
       @item_selector = "//div[@class=\'pditem\']/div[@class=\'pdicon\']"
       @title_selector = "div[@class=\'pdicon_name\']/a"
-      @price_selector = "div[@class=\'pdicon_price\']/div[@style=\'font-weight:bold;\']"
+      @price_selector =
+      "div[@class=\'pdicon_price\']/div[@style=\'font-weight:bold;\']"
       @site_url = 'https://www.queenshop.com.tw/m/PDList2.asp?'
       @price_filter = nil
     end
 
-    def scrape (params=[])
+    def scrape(params = [])
       conf = QConfig.new(params)
       @price_filter = conf.parameters[:price]
 
       conf.pages.map do |page|
         paginated_uri = "&page=#{page}"
-        fetch_result (paginated_uri)
+        fetch_result(paginated_uri)
       end
       @result
     end
-
   end
 end

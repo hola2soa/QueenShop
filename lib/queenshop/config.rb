@@ -9,31 +9,28 @@ module Validate
   VALID_ARGS = [:item, :price, :pages]
 
   def validate_args(args)
-    @parameters = {item: '', price: '', pages: '1..2'}
-    puts '----------------------'
-    puts args
+    @parameters = { item: '', price: '', pages: '1..2' }
     args.each do |arg|
       begin
         match = /(?<key>.*?)=(?<value>.*)/.match(arg)
-        puts '..................................'
-        puts match
         fail unless VALID_ARGS.include?(match[:key].to_sym)
         value = check(match)
         @parameters[match[:key].to_sym] = value
       rescue StandardError
-        abort "invalid usage...\n" << usage << "\n\n"
+        abort 'invalid usage: ' << usage << "\n\n"
       end
     end
   end # end validate_args
 
   def check(match)
     value = match[:value]
-    fail unless value =~ /^(>|<|>=|<=|==)\d*.\d*?$/ if match[:key].to_sym.eql?(:price)
+    fail unless
+    value =~ /^(>|<|>=|<=|==)\d*.\d*?$/ if match[:key].to_sym.eql?(:price)
     # Float(value) if match[:key].to_sym.eql?(:price)
     fail unless value =~ /^\d*([.]{2}\d*)?$/ if match[:key].to_sym.eql?(:pages)
     value
   rescue StandardError
-      abort "invalid parameters"
+      abort 'invalid parameters'
   end
 
   def pages
@@ -53,10 +50,11 @@ module Validate
   end
 end
 
+# basic config name conflic if called Config
 class QConfig
   include Validate
-  def initialize (args)
-    validate_args (args)
+  def initialize(args)
+    validate_args(args)
     pages
   end
 end
