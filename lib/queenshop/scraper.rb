@@ -67,7 +67,6 @@ module QueenShopScraper
     end
 
     def scrape (params=[])
-      params = ARGV.empty? ? params : ARGV
       conf = QConfig.new(params)
       @price_filter = conf.parameters[:price]
 
