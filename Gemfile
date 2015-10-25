@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'oga'
+gem 'iconv'
 
 group :test do
   gem 'rake'

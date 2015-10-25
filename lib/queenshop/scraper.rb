@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'oga'
+require 'iconv'
 require 'open-uri'
 require_relative './config'
 
@@ -17,7 +18,9 @@ module QueenShopScraper
 
     def get_xmldata(url)
       raw_html = open(url)
-      Oga.parse_html(raw_html)
+      ic = Iconv.new('UTF-8','big5')
+      data = ic.iconv(raw_html.read)
+      Oga.parse_html(data)
     rescue StandardError
       'error'
     end
@@ -64,6 +67,7 @@ module QueenShopScraper
     end
 
     def scrape (params=[])
+      params = ARGV.empty? ? params : ARGV
       conf = QConfig.new(params)
       @price_filter = conf.parameters[:price]
 
