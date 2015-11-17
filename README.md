@@ -1,5 +1,4 @@
-# QueenShop API
-# Pinkoi [![Gem Version](https://badge.fury.io/rb/queenshop.svg)](https://badge.fury.io/rb/queenshop) [![Build Status](https://travis-ci.org/hola2soa/QueenShop.svg?branch=master)](https://travis-ci.org/hola2soa/QueenShop)
+# QueenShop API [![Gem Version](https://badge.fury.io/rb/queenshop.svg)](https://badge.fury.io/rb/queenshop) [![Build Status](https://travis-ci.org/hola2soa/QueenShop.svg?branch=master)](https://travis-ci.org/hola2soa/QueenShop)
 
 Queenshop is an ecommerce website selling women clothing but does not have an api.
 This API allows the scrapping of the site to extract the title and price
