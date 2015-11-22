@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'queenshop'
-  s.version     = '0.0.7'
+  s.version     = '0.0.8'
   s.date        = '2015-11-22'
   s.summary     = 'Scraper for Queenshop'
   s.description = "This is a gem scraping queenshop's website and returns the items with corresponding prices"

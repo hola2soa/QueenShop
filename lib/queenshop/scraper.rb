@@ -37,7 +37,7 @@ module QueenShopScraper
       items.map do |item|
         title = item.xpath(@title_selector).text()
         price = item.xpath(@price_selector).text
-        strip_filter(title, price) unless title.chomp().empty?
+        strip_filter(title, price) if title.downcase.include? @item_filter
       end
       @result
     end
@@ -70,10 +70,7 @@ module QueenShopScraper
       params = ARGV.empty? ? params : ARGV
       conf = QConfig.new(params)
       @price_filter = conf.parameters[:price]
-      search = "/text()[contains(
-        translate(.,'ABCDEFGHIJKLOMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),
-        translate('#{conf.parameters[:item]}','ABCDEFGHIJKLOMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'))]"
-      @title_selector << search
+      @item_filter = conf.parameters[:item].downcase
 
       conf.pages.map do |page|
         paginated_uri = "&page=#{page}"
