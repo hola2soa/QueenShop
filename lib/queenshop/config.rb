@@ -9,14 +9,10 @@ module Validate
   VALID_ARGS = [:item, :price, :pages]
 
   def validate_args(args)
-    @parameters = {item: '', price: '', pages: '1..2'}
-    puts '----------------------'
-    puts args
+    @parameters = {item: '', price: '', pages: '1..7'}
     args.each do |arg|
       begin
         match = /(?<key>.*?)=(?<value>.*)/.match(arg)
-        puts '..................................'
-        puts match
         fail unless VALID_ARGS.include?(match[:key].to_sym)
         value = check(match)
         @parameters[match[:key].to_sym] = value

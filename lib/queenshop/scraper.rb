@@ -35,9 +35,9 @@ module QueenShopScraper
       items = document.xpath(@item_selector)
       # loop through the items and get the title and price
       items.map do |item|
-        title = item.xpath(@title_selector).text.force_encoding('UTF-8')
+        title = item.xpath(@title_selector).text()
         price = item.xpath(@price_selector).text
-        strip_filter(title, price)
+        strip_filter(title, price) unless title.chomp().empty?
       end
       @result
     end
@@ -70,10 +70,11 @@ module QueenShopScraper
       params = ARGV.empty? ? params : ARGV
       conf = QConfig.new(params)
       @price_filter = conf.parameters[:price]
-
+      @title_selector << "/text()[contains(.,'#{conf.parameters[:item]}')]"
+      
       conf.pages.map do |page|
         paginated_uri = "&page=#{page}"
-        fetch_result (paginated_uri)
+        fetch_result(paginated_uri)
       end
       @result
     end
