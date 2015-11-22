@@ -17,12 +17,12 @@ You can execute it from the command line. Assume you want to get the items
 which have their price more than 300 the following command
 will produce the list of item/price:
 ```sh
-$ pinkoi --price=">300"
+$ queenshop --price=">300"
 ```
 More parameters and examples:
 ```sh
 comparator can be: < or < or <= or >= or ==
-Usage: pinkoi [options]
+Usage: queenshop [options]
       price="comparator(float)"
       item=(string)
       pages=(int[..int])
