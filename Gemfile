@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'oga'
 gem 'iconv'
+gem 'miro'
 
 group :test do
   gem 'rake'

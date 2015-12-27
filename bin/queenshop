@@ -2,5 +2,20 @@
 # require 'queenshop' # for production
 require_relative '../lib/queenshop.rb' # for testing
 
-scraper = QueenShopScraper::Filter.new
-puts scraper.scrape(ARGV)
+@scraper = QueenShop::Scraper.new
+
+def get_args argv
+  input_length = argv.length
+  abort 'invalid usage' unless input_length <= 4
+  if input_length == 1
+    @scraper.scrape(argv[0])
+  elsif input_length == 2
+    @scraper.scrape(argv[0], argv[1])
+  elsif input_length == 3
+    @scraper.scrape_filter(argv[0], argv[1], argv[2])
+  elsif input_length == 4
+    @scraper.scrape_filter(argv[0], argv[1], argv[2], argv[3])
+  end
+end
+
+puts get_args ARGV
