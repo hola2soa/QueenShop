@@ -159,7 +159,8 @@ module QueenShop
 
     def scrape_what(type, options)
       records = []
-      page_limit = options[:page_limit] || 10
+      pl = options[:page_limit].to_i
+      page_limit = pl != 0 ? pl : 5
 
       1.upto(page_limit) do |page|
         method = self.method(type)
