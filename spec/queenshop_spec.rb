@@ -9,7 +9,8 @@ VCR.use_cassette 'queenshop' do
     describe 'fetch popular' do
       manage_cassettes 'popular items'
       it 'should check correct structure' do
-        items = @scraper.popular(1)
+        options = { keyword: '花口袋開' }
+        items = @scraper.popular(1, options)
         check_correct_structure items
       end
     end
@@ -26,6 +27,17 @@ VCR.use_cassette 'queenshop' do
       manage_cassettes 'tops items'
       it 'should check correct structure' do
         items = @scraper.tops(1)
+        check_correct_structure items
+      end
+    end
+
+    describe 'fetch accessories' do
+      manage_cassettes 'accessories'
+      it 'should check correct structure' do
+        options = { keyword: '刷毛上衣',
+          page_limit: 12, price_boundary: [100, 900]
+        }
+        items = @scraper.popular('accessories', options)
         check_correct_structure items
       end
     end

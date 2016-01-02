@@ -13,20 +13,18 @@ Install queenshop api using this command:
 $ gem install queenshop
 ```
 
-The first parameter represents what you want to scrape and it is mandatory.
+The first parameter represents the category you want to scrape. If no parameters
+are passed then the "latest" category is scrapped.
 The second parameter can be an integer to represent max number of pages
-to scrape or it can be a string representing item title to filter. If
-the second parameter is a string, a third optional parameter can be supplied,
-this will represent a price to filter items. Optionally a fourth parameter to
-represent page limit to filter can be passed. If title or price is not needed
-a -1 can be passed to avoid filtering. For example:
+to scrape or it can be a string representing item title to filter. The third and
+fourth parameter can be used to represent price range. Leaving the page limit to be
+represented by the firth parameter. For example:
 
 ```sh
-$ queenshop tops 20
-$ queenshop pants "磨毛吊帶" 450
-$ queenshop latest -1 500
-$ queenshop popular "Christmas" -1
-$ queenshop popular -1 -1 5
+$ queenshop tops 20 # scrape 20 pages of tops category
+$ queenshop pants "磨毛吊帶" 2 # scrape first two pages of pants category filter kw
+$ queenshop latest 200 500 # scrape the latest category price matching 200 to 500
+$ queenshop popular "Christmas" 400 500 2 # scrape 2 popular pages price 400 - 500
 ```
 If you want to use it in your library:
 ```ruby
@@ -36,11 +34,12 @@ results = scraper.latest(1)
 ```
 The following functions are available:
 ```ruby
-scraper.latest(page_number_to_scrape[, page_limit])
-scraper.popular(page_number_to_scrape[, page_limit])
-scraper.pants(page_number_to_scrape[, page_limit])
-scraper.tops(page_number_to_scrape[, page_limit])
-scraper.accessories(page_number_to_scrape[, page_limit])
-scraper.scrape(what_section_to_scrape, page_limit)
-scraper.scrape_filter(what_section_to_scrape[, title, price, page_limit])
+scraper.latest(page_number_to_scrape[, options])
+scraper.popular(page_number_to_scrape[, options])
+scraper.pants(page_number_to_scrape[, options])
+scraper.tops(page_number_to_scrape[, options])
+scraper.accessories(page_number_to_scrape[, options])
+scraper.scrape(what_section_to_scrape[, options])
 ```
+options is an optional hash having keyword, page_limit,
+price_boundary (array two numbers)
