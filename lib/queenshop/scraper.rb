@@ -11,7 +11,6 @@ module QueenShop
     BASE_SCRAPE_URL = "#{BASE_URL}/m/PDList2.asp?"
 
     LATEST_URI      = "#{BASE_SCRAPE_URL}item1=new"
-    DISCOUNT_URI    = "#{BASE_SCRAPE_URL}item1=dis"
     POPULAR_URI     = "#{BASE_SCRAPE_URL}item1=pre"
     TOPS_URI        = "#{BASE_SCRAPE_URL}brand=01&item1=00&item2=6"
     PANTS_URI       = "#{BASE_SCRAPE_URL}brand=01&item1=01&item2=3"
@@ -31,22 +30,22 @@ module QueenShop
     end
 
     def popular(page, options = {})
-      uri  = uri_with_options(build_uri(LATEST_URI, options), page)
+      uri  = uri_with_options(build_uri(POPULAR_URI, options), page)
       process_request(uri, options)
     end
 
     def tops(page, options = {})
-      uri  = uri_with_options(build_uri(LATEST_URI, options), page)
+      uri  = uri_with_options(build_uri(TOPS_URI, options), page)
       process_request(uri, options)
     end
 
     def pants(page, options = {})
-      uri  = uri_with_options(build_uri(LATEST_URI, options), page)
+      uri  = uri_with_options(build_uri(PANTS_URI, options), page)
       process_request(uri, options)
     end
 
     def accessories(page, options = {})
-      uri  = uri_with_options(build_uri(LATEST_URI, options), page)
+      uri  = uri_with_options(build_uri(ACCESSORIES_URI, options), page)
       process_request(uri, options)
     end
 
