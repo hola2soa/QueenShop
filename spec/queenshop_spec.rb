@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+# encoding: utf-8
 
 VCR.use_cassette 'queenshop' do
   describe 'check if queenshop tests pass' do
