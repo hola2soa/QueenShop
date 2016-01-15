@@ -29,7 +29,7 @@ $ queenshop popular "Christmas" 400 500 2 # scrape 2 popular pages price 400 - 5
 If you want to use it in your library:
 ```ruby
 require 'queenshop'
-scraper = QueenShopScraper::Filter.new
+scraper = QueenShop::Scraper.new
 results = scraper.latest(1)
 ```
 The following functions are available:
